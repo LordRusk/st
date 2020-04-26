@@ -22,7 +22,7 @@ The [suckless terminal (st)](https://st.suckless.org/) with some additional feat
 ## Pretty stuff
 
 + Default [dracula](https://dracula) colors.
-+ AlphaFocusHighlight, two difference alpha values, one for when the terminal is focused, one when the terminal is not.
++ AlphaFocusHighlight, two different alpha values, one for when the terminal is focused, one when the terminal is not.
 + Default font is system "mono" at 14pt, meaning the font will match your system font.
 
 ## Other st patches
