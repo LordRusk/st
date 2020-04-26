@@ -21,7 +21,7 @@ The [suckless terminal (st)](https://st.suckless.org/) with some additional feat
 
 ## Pretty stuff
 
-+ Default [dracula](https://dracula) colors.
++ Default modified [dracula](https://dracula) colors. (background switched to black by default)
 + AlphaFocusHighlight, two different alpha values, one for when the terminal is focused, one when the terminal is not.
 + Default font is system "mono" at 14pt, meaning the font will match your system font.
 
@@ -30,6 +30,7 @@ The [suckless terminal (st)](https://st.suckless.org/) with some additional feat
 + Vertcenter
 + Scrollback (via vimbrowse)
 + Font2
++ BoxDraw
 + Anysize
 
 ## Installation

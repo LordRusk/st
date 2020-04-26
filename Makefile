@@ -4,7 +4,7 @@
 
 include config.mk
 
-SRC = st.c x.c normalMode.c
+SRC = st.c x.c normalMode.c boxdraw.c
 OBJ = $(SRC:.c=.o)
 
 all: options st
@@ -23,6 +23,7 @@ config.h:
 
 st.o: config.h st.h win.h dynamicArray.h normalMode.h term.h glyph.h error.h
 x.o: arg.h config.h st.h win.h dynamicArray.h normalMode.h term.h glyph.h error.h
+boxdraw.o: config.h st.h boxdraw_data.h
 
 $(OBJ): config.h config.mk
 
