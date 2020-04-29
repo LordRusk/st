@@ -32,6 +32,7 @@ The [suckless terminal (st)](https://st.suckless.org/) with some additional feat
 + Font2
 + BoxDraw
 + Anysize
++ Updated to latest commit (2020-04-27 'bumb version to 0.8.3')
 
 ## Installation
 
