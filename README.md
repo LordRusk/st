@@ -27,11 +27,12 @@ The [suckless terminal (st)](https://st.suckless.org/) with some additional feat
 
 ## Other st patches
 
-+ Vertcenter
-+ Scrollback (via vimbrowse)
-+ Font2
-+ BoxDraw
 + Anysize
++ AutoSync
++ BoxDraw
++ Font2
++ Scrollback (via vimbrowse)
++ Vertcenter
 + Updated to latest commit (2020-04-27 'bumb version to 0.8.3')
 
 ## Installation
