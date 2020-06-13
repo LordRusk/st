@@ -27,6 +27,7 @@ The [suckless terminal (st)](https://st.suckless.org/) with some additional feat
 
 ## Other st patches
 
++ Anysize
 + AutoSync
 + BoxDraw
 + Font2
