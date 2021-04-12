@@ -4,6 +4,7 @@ Lots of helpful shit
 
 Patches
 -------
+same name as on https://st.suckless.org/patches
 
 	alpha
 	anysize
@@ -17,6 +18,7 @@ Patches
 		open URLS
 	font2 // allows for setting backup fonts
 	meta-vim-full // https://st.suckless.org/patches/vim_browse/
+	newterm // spawn a new terminal in working directory
 	w3m // w3m hack works without fucking up buffer
 
 st - simple terminal
