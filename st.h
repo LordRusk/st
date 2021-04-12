@@ -1,8 +1,5 @@
 /* See LICENSE for license details. */
 
-#include "glyph.h"
-#include "normalMode.h"
-
 #include <stdint.h>
 #include <sys/types.h>
 
@@ -11,6 +8,7 @@
 #define MAX(a, b)		((a) < (b) ? (b) : (a))
 #define LEN(a)			(sizeof(a) / sizeof(a)[0])
 #define BETWEEN(x, a, b)	((a) <= (x) && (x) <= (b))
+#define OUT(x, a, b)		((a) <= (x) || (x) <= (b))
 #define DIVCEIL(n, d)		(((n) + ((d) - 1)) / (d))
 #define DEFAULT(a, b)		(a) = (a) ? (a) : (b)
 #define LIMIT(x, a, b)		(x) = (x) < (a) ? (a) : (x) > (b) ? (b) : (x)
@@ -37,21 +35,18 @@ enum glyph_attribute {
 	ATTR_WIDE       = 1 << 9,
 	ATTR_WDUMMY     = 1 << 10,
 	ATTR_BOXDRAW    = 1 << 11,
-	ATTR_HIGHLIGHT  = 1 << 12,
-	ATTR_CURRENT    = 1 << 13,
 	ATTR_BOLD_FAINT = ATTR_BOLD | ATTR_FAINT,
-};
-
-enum drawing_mode {
-	DRAW_NONE = 0,
-	DRAW_BG   = 1 << 0,
-	DRAW_FG   = 1 << 1,
 };
 
 enum selection_mode {
 	SEL_IDLE = 0,
 	SEL_EMPTY = 1,
 	SEL_READY = 2
+};
+
+enum selection_type {
+	SEL_REGULAR = 1,
+	SEL_RECTANGULAR = 2
 };
 
 enum selection_snap {
@@ -64,22 +59,31 @@ typedef unsigned int uint;
 typedef unsigned long ulong;
 typedef unsigned short ushort;
 
+typedef uint_least32_t Rune;
+
+#define Glyph Glyph_
+typedef struct {
+	Rune u;           /* character code */
+	ushort mode;      /* attribute flags */
+	uint32_t fg;      /* foreground  */
+	uint32_t bg;      /* background  */
+} Glyph;
+
+typedef Glyph *Line;
+
 typedef union {
 	int i;
 	uint ui;
 	float f;
 	const void *v;
+	const char *s;
 } Arg;
 
 void die(const char *, ...);
 void redraw(void);
 void draw(void);
 
-int currentLine(int, int);
-void kscrolldown(const Arg *);
-void kscrollup(const Arg *);
-void normalMode(Arg const *);
-
+void newterm(const Arg *);
 void externalpipe(const Arg *);
 void printscreen(const Arg *);
 void printsel(const Arg *);
@@ -90,9 +94,6 @@ int tattrset(int);
 void tnew(int, int);
 void tresize(int, int);
 void tsetdirtattr(int);
-size_t utf8decode(const char *, Rune *, size_t);
-Rune utf8decodebyte(char, size_t *);
-void tsetdirt(int, int);
 void ttyhangup(void);
 int ttynew(char *, char *, char *, char **);
 size_t ttyread(void);
@@ -103,10 +104,8 @@ void resettitle(void);
 
 void selclear(void);
 void selinit(void);
-void selstart(int, int, int, int);
-void xselstart(int, int, int);
-void selextend(int, int, int, int, int);
-void xselextend(int, int, int, int);
+void selstart(int, int, int);
+void selextend(int, int, int, int);
 int selected(int, int);
 char *getsel(void);
 
@@ -126,15 +125,15 @@ void drawboxes(int, int, int, int, XftColor *, XftColor *, const XftGlyphFontSpe
 
 /* config.h globals */
 extern char *utmp;
+extern char *scroll;
 extern char *stty_args;
 extern char *vtiden;
 extern wchar_t *worddelimiters;
 extern int allowaltscreen;
+extern int allowwindowops;
 extern char *termname;
 extern unsigned int tabspaces;
 extern unsigned int defaultfg;
 extern unsigned int defaultbg;
 extern float alpha;
-extern float alphaUnfocussed;
-
 extern const int boxdraw, boxdraw_bold, boxdraw_braille;
