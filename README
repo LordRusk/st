@@ -1,26 +1,3 @@
-Rusk's Build of st
-------------------
-Lots of helpful shit
-
-Patches
--------
-same name as on https://st.suckless.org/patches
-
-	alpha
-	anysize
-	bold-is-not-bright
-	boxdraw (all enabled by default)
-	clipboard // uses same clipboard as browser by default
-	dracula // 9/10 colorscheme
-	externalpipe
-		copy output of commands
-		copy URLS
-		open URLS
-	font2 // allows for setting backup fonts
-	meta-vim-full // https://st.suckless.org/patches/vim_browse/
-	newterm // spawn a new terminal in working directory
-	w3m // w3m hack works without fucking up buffer
-
 st - simple terminal
 --------------------
 st is a simple terminal emulator for X which sucks less.

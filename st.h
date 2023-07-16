@@ -83,7 +83,6 @@ void die(const char *, ...);
 void redraw(void);
 void draw(void);
 
-void newterm(const Arg *);
 void externalpipe(const Arg *);
 void printscreen(const Arg *);
 void printsel(const Arg *);
@@ -93,9 +92,10 @@ void toggleprinter(const Arg *);
 int tattrset(int);
 void tnew(int, int);
 void tresize(int, int);
+void tmoveto(int x, int y);
 void tsetdirtattr(int);
 void ttyhangup(void);
-int ttynew(char *, char *, char *, char **);
+int ttynew(const char *, char *, const char *, char **);
 size_t ttyread(void);
 void ttyresize(int, int);
 void ttywrite(const char *, size_t, int);
@@ -113,7 +113,7 @@ size_t utf8encode(Rune, char *);
 
 void *xmalloc(size_t);
 void *xrealloc(void *, size_t);
-char *xstrdup(char *);
+char *xstrdup(const char *);
 
 int isboxdraw(Rune);
 ushort boxdrawindex(const Glyph *);
@@ -124,6 +124,7 @@ void drawboxes(int, int, int, int, XftColor *, XftColor *, const XftGlyphFontSpe
 #endif
 
 /* config.h globals */
+extern char *externalpipe_sigusr1[];
 extern char *utmp;
 extern char *scroll;
 extern char *stty_args;
@@ -135,5 +136,5 @@ extern char *termname;
 extern unsigned int tabspaces;
 extern unsigned int defaultfg;
 extern unsigned int defaultbg;
-extern float alpha;
+extern unsigned int defaultcs;
 extern const int boxdraw, boxdraw_bold, boxdraw_braille;
